@@ -1,0 +1,39 @@
+# Test for lazy_matrix_mul function
+
+# Import the function to be tested
+from lazy_matrix_mul import lazy_matrix_mul
+
+# Test case 1: Valid input, matrices can be multiplied
+# Given matrices
+matrix_a = [[1, 2], [3, 4]]
+matrix_b = [[5, 6], [7, 8]]
+# Expected result
+result_1 = [[19, 22], [43, 50]]
+# Ensure the result matches the expected result
+assert lazy_matrix_mul(matrix_a, matrix_b) == result_1
+
+# Test case 2: Invalid input, matrices cannot be multiplied
+# Given matrices
+matrix_c = [[1, 2, 3], [4, 5, 6]]
+matrix_d = [[7, 8], [9, 10]]
+# Expected error message
+error_message_2 = "shapes (2,3) and (2,2) not aligned"
+# Ensure the function raises a ValueError with the expected error message
+try:
+    lazy_matrix_mul(matrix_c, matrix_d)
+    assert False, "Test case 2 did not raise an exception"
+except ValueError as e:
+    assert str(e) == error_message_2
+
+# Test case 3: Empty matrices
+# Given empty matrices
+matrix_e = []
+matrix_f = []
+# Expected error message
+error_message_3 = "shapes (0,0) and (0,0) not aligned"
+# Ensure the function raises a ValueError with the expected error message
+try:
+    lazy_matrix_mul(matrix_e, matrix_f)
+    assert False, "Test case 3 did not raise an exception"
+except ValueError as e:
+    assert str(e) == error_message_3

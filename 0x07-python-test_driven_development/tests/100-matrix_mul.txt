@@ -1,0 +1,49 @@
+import unittest
+from matrix_mul import matrix_mul
+
+class TestMatrixMultiplication(unittest.TestCase):
+    # Test valid matrix multiplication
+    def test_valid_matrix_multiplication(self):
+        matrix_a = [[1, 2], [3, 4]]
+        matrix_b = [[5, 6], [7, 8]]
+        result = matrix_mul(matrix_a, matrix_b)
+        expected_result = [[19, 22], [43, 50]]
+        self.assertEqual(result, expected_result)
+
+    # Test invalid matrix types
+    def test_invalid_matrix_types(self):
+        with self.assertRaises(TypeError):
+            matrix_a = [1, 2]
+            matrix_b = [[3, 4], [5, 6]]
+            matrix_mul(matrix_a, matrix_b)
+
+    # Test empty matrices
+    def test_empty_matrices(self):
+        with self.assertRaises(ValueError):
+            matrix_a = []
+            matrix_b = [[]]
+            matrix_mul(matrix_a, matrix_b)
+
+    # Test non-rectangular matrices
+    def test_non_rectangular_matrices(self):
+        with self.assertRaises(TypeError):
+            matrix_a = [[1, 2], [3]]
+            matrix_b = [[4, 5], [6, 7]]
+            matrix_mul(matrix_a, matrix_b)
+
+    # Test non-integer or non-float elements
+    def test_non_integer_float_elements(self):
+        with self.assertRaises(TypeError):
+            matrix_a = [[1, 2], [3, 'four']]
+            matrix_b = [['five', 6], [7, 8]]
+            matrix_mul(matrix_a, matrix_b)
+
+    # Test matrices that cannot be multiplied
+    def test_matrices_cannot_be_multiplied(self):
+        with self.assertRaises(ValueError):
+            matrix_a = [[1, 2, 3], [4, 5, 6]]
+            matrix_b = [[7, 8], [9, 10], [11, 12]]
+            matrix_mul(matrix_a, matrix_b)
+
+if __name__ == '__main__':
+    unittest.main()
